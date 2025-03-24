@@ -1,0 +1,185 @@
+// USING ARRAY 
+class StackArray{
+    int[] arr ;
+    int top ;
+    public StackArray(int size){
+        arr = new int[size];
+        top = -1 ;
+    }
+    public void push(int data){
+        if(top==arr.length-1){
+            System.out.println("Overflow");
+            return ;
+        }
+
+        arr[++top] = data ;
+    }
+    public int pop(){
+        if(top==-1){
+            System.out.println("Underflow..");
+            return -1 ;
+        }
+        int ele = arr[top];
+        top = top-1 ;
+        return ele ;
+    }
+
+    public int peek(){
+        if(top==-1){
+            System.out.println("Null..");
+            return -1 ;
+        }
+        return arr[top];
+    }
+
+
+
+}
+
+public class ImplementationUsingArray {
+    public static void main(String[] args) {
+
+
+        StackArray st = new StackArray(2);
+        st.push(1);
+        st.push(2);
+        st.push(3);
+        st.push(4);
+        System.out.println(st.peek());
+        System.out.println(st.pop());
+        System.out.println(st.pop());
+        System.out.println(st.pop());
+
+
+
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// USING ARRAYLIST
+
+class StackAl{
+    ArrayList<Integer> al;
+
+    public StackAl(){
+        al = new ArrayList<>();
+
+    }
+    public boolean isEmpty(){
+        return al.size()==0 ;
+    }
+
+    public void push(int data){
+
+        al.add(data);
+    }
+    public int pop(){
+        if(al.isEmpty()){
+            System.out.println("Underflow..");
+            return -1 ;
+        }
+
+
+        return al.remove(al.size()-1);
+    }
+
+    public int peek(){
+        if(al.isEmpty()){
+            System.out.println("Underflow");
+            return -1 ;
+        }
+
+        return al.get(al.size()-1);
+
+    }
+
+}
+
+public class ImplementationUsingArrayList {
+    public static void main(String[] args) {
+
+
+        StackAl st = new StackAl();
+        System.out.println(st.peek());
+        System.out.println(st.pop());
+        st.push(2);
+        st.push(7);
+        System.out.println(st.peek());
+    }
+
+}
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+// USING LINKEDLIST 
+
+class Node{
+    int data ;
+    Node next ;
+    public Node(int data){
+        this.data = data ;
+        next = null ;
+    }
+
+}
+class StackLl{
+    Node head;
+
+    public StackLl(){
+        head = null ;
+
+    }
+
+    public void push(int data){
+        Node temp = new Node(data);
+        if(head==null){
+            head = temp ;
+        }
+        else{
+            temp.next = head ;
+            head = temp ;
+        }
+
+    }
+    public int pop(){
+        if(head==null){
+            System.out.println("Underflow..");
+            return -1 ;
+        }
+        Node temp = head ;
+        head = head.next ;
+        return temp.data ;
+
+    }
+
+    public int peek(){
+        if(head==null){
+            System.out.println("Underflow");
+            return -1 ;
+        }
+
+        return head.data ;
+
+    }
+
+}
+
+public class ImplemantationUsingLL {
+    public static void main(String[] args) {
+
+        StackLl ll = new StackLl();
+        System.out.println(ll.pop());
+        ll.push(16);
+        ll.push(27);
+        System.out.println(ll.pop());
+        System.out.println(ll.pop());
+        System.out.println(ll.pop());
+        System.out.println(ll.peek());
+
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
