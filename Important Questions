@@ -1,0 +1,141 @@
+1>- BALANCED PARENTHESIS CHECKER 
+
+class Solution {
+    static boolean isBalanced(String s) {
+        // code here
+        
+        Stack<Character> st = new Stack<>();
+        
+        int i = 0 ; 
+        while(i<s.length()){
+            char ch = s.charAt(i);
+            if(ch=='{' || ch=='(' || ch=='['){
+                st.push(ch);
+            }
+            else{
+                if(st.isEmpty()){
+                    return false ; 
+                }
+                char prev = st.pop();
+                if(!((prev=='{' && ch=='}') ||(prev=='[' && ch==']')||(prev=='(' && ch==')'))){
+                    return false ; 
+                }
+                
+            }
+            i++ ; 
+        }
+        return st.isEmpty();
+    }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+2>- // NEXT GREATER ELEMENT
+class Solution {
+    // Function to find the next greater element for each element of the array.
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        // code here
+        
+        ArrayList<Integer> ans = new ArrayList<>();
+        
+        for(int i = 0 ; i<arr.length ; i++){
+            boolean flag = false ;
+            for(int j = i+1 ; j<arr.length ; j++){
+                if(arr[i]<arr[j]){
+                    ans.add(arr[j]);
+                    flag = true ; 
+                    break ; 
+                }
+            }
+            if(!flag){
+                ans.add(-1);
+            }
+            
+        }
+        
+        return ans ;
+        
+        
+    }
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+3 > NGE IN CIRCULAR ARRAY 
+class Solution {
+    public ArrayList<Integer> nextLargerElement(int[] arr) {
+        // code here
+        
+        Stack<Integer> st = new Stack<>();
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 2*arr.length-1 ; i>=0 ; i--){
+            while(!st.isEmpty() && st.peek()<=arr[i%arr.length]){
+                st.pop();
+            }
+            if(i<arr.length){
+                if(st.isEmpty()){
+                    ans.add(-1);
+                }
+                else{
+                    ans.add(st.peek());
+                }
+            }
+            st.push(arr[i%arr.length]);
+            
+        }
+        
+        Collections.reverse(ans);
+        return ans ;
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. SMALLER ON LEFT 
+
+
+class Solution{
+    static List<Integer> leftSmaller(int n, int a[])
+    {
+        //code here
+        
+        List<Integer> ans = new ArrayList<>();
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+        for(int i = 0 ; i<n ; i++){
+            while(!ad.isEmpty() && ad.peek()>=a[i]){
+                ad.pop();
+            }
+            ans.add(ad.isEmpty()? -1 : ad.peek());
+            ad.push(a[i]);
+        }
+        return ans ;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. TRAPPING RAIN WATER 
+
+class Solution {
+    public int maxWater(int arr[]) {
+        // code here
+        int n = arr.length ; 
+        int [] left = new int[n] ; 
+        int [] right = new int[n] ; 
+        
+        left[0] = arr[0] ; 
+        for(int i = 1; i<n ; i++){
+            left[i] = Math.max(left[i-1],arr[i]);
+        }
+        right[n-1] = arr[n-1] ; 
+        for(int i = n-2 ; i>=0  ; i--){
+            right[i] = Math.max(right[i+1],arr[i]);
+        }
+        int count = 0 ; 
+        for(int i =0 ; i<n ; i++){
+            count+= (Math.min(left[i],right[i])-arr[i]);
+        }
+        return count ;
+    }
+}
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
